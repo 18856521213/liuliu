@@ -1,6 +1,6 @@
 module.exports = {
   productionSourceMap: false,
-  publicPath: './',
+  publicPath: '/',
   outputDir: 'dist',
   assetsDir: 'assets',
   transpileDependencies: [/[/\\]node_modules[/\\]_sockjs-client@1.5.1@sockjs-client[/\\]dist[/\\]/],

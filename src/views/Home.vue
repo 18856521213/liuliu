@@ -5,7 +5,7 @@
         <Header />
       </el-header>
       <el-container>
-        <el-aside width="200px">
+        <el-aside width="260px">
           <el-menu
             router
             default-active="2"
@@ -17,12 +17,16 @@
               </el-menu-item>
               <el-submenu :index="item.meta.fullPath" v-else>
                 <template slot="title">
-                  <i class="el-icon-location"></i>
+                  <i :class="item.meta.icon"></i>
                   <span>{{item.meta.name}}</span>
                 </template>
-                <el-menu-item-group>
-                  <el-menu-item v-for="child in item.children" :index="child.meta.fullPath" :key="child.meta.fullPath">{{ child.meta.name }}</el-menu-item>
-                </el-menu-item-group>
+                <template v-for="son in item.children">
+                  <el-menu-item v-if="!son.children" :index="son.meta.fullPath">{{ son.meta.name }}</el-menu-item>
+                  <el-submenu v-else :index="son.meta.fullPath">
+                    <template slot="title">{{ son.meta.name }}</template>
+                    <el-menu-item v-for="child in son.children" :index="child.meta.fullPath" :key="child.meta.fullPath">{{ child.meta.name }}</el-menu-item>
+                  </el-submenu>
+                </template>
               </el-submenu>
             </template>
           </el-menu>
@@ -79,5 +83,9 @@ export default {
 }
 .el-menu-vertical-demo {
   height: calc(100vh - 60px);
+}
+.home >>> .el-main {
+  height: calc(100vh - 80px);
+  overflow-y: auto;
 }
 </style>
