@@ -32,6 +32,9 @@
           </el-menu>
         </el-aside>
         <el-main>
+          <!-- <div class="nav">
+            <el-tag size="medium" v-for="item in navList" :key="item.fullPath" closable>{{ item.name }}</el-tag>
+          </div> -->
           <transition name="el-fade-in" mode="out-in">
               <router-view/>
           </transition>
@@ -55,6 +58,24 @@ export default {
   components: {
     Header
   },
+  data() {
+    return {
+      navList: []
+    }
+  },
+  watch: {
+    "$route": {
+      deep: true,
+      immediate: true,
+      handler(val) {
+        console.log(val)
+        let newArr = this.navList.map(item => item.fullPath);
+        if(!newArr.includes(val.meta.fullPath)) {
+          this.navList.push(val)
+        }
+      }
+    }
+  },
   computed: {
     routerList() {
       let list= null;
@@ -64,11 +85,6 @@ export default {
         }
       })
       return list
-    }
-  },
-  data() {
-    return {
-
     }
   },
   methods: {
@@ -83,9 +99,19 @@ export default {
 }
 .el-menu-vertical-demo {
   height: calc(100vh - 60px);
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 .home >>> .el-main {
-  height: calc(100vh - 80px);
+  height: calc(100vh - 100px);
   overflow-y: auto;
+}
+.nav {
+  padding: 10px;
+  border-bottom: 1px solid #e6e6e6;
+  margin-bottom: 10px;
+}
+.el-tag {
+  margin-left: 5px;
 }
 </style>

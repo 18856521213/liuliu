@@ -4,7 +4,6 @@
     <div class="table-box" style="padding: 10px;">
       <el-table :data="tableData" :show-header="false" style="width: 100%" border>
         <el-table-column prop="value" label="a"></el-table-column>
-        <el-table-column prop="value1" label="a"></el-table-column>
         <el-table-column prop="value2" label="a"></el-table-column>
         <el-table-column prop="value3" label="a"></el-table-column>
         <el-table-column prop="value4" label="a"></el-table-column>
